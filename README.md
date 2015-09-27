@@ -43,3 +43,35 @@ optional arguments:
 ```
 
 Una carpeta será generada con todos los archivos necesarios para la generación de los certificados en PDF. Dentro de esa carpeta, un script llamado ``run.sh`` los genera.
+
+## Instalación
+
+Para instalar las dependencias de Python:
+
+```bash
+virtualenv env #opcional
+source env/bin/activate #opcional
+pip install -r requirements.txt
+```
+
+Es necesario contar con una instalación de LaTeX en el equipo, como proTeXt, MacTeX o TeX Live. [Aquí](https://latex-project.org/ftp.html) puede encontrarse ayuda para la descarga.
+
+El archivo plantilla utiliza la fuente Arial, incluida en el paquete ``uarial``, no incluido en la instalación por defecto de ``LaTeX``. Para instalar:
+
+```bash
+wget -q http://tug.org/fonts/getnonfreefonts/install-getnonfreefonts
+sudo texlua ./install-getnonfreefonts
+sudo getnonfreefonts -a
+```
+(Ver [1](http://tex.stackexchange.com/a/60650/76599) y [2](http://www.ctan.org/tex-archive/fonts/urw/arial/) para más información).
+
+Si no quiere utilizar esta fuente, puede comentar las siguientes líneas en la plantilla:
+
+```tex
+\usepackage[scaled]{uarial}
+\renewcommand*\familydefault{\sfdefault}
+```
+
+## LICENCIA
+
+Licencia MIT
