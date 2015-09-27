@@ -5,6 +5,8 @@ import csv # Proceso de ficheros CSV
 import sys # Interacción con el sistema operativo
 import pystache # Generación de documentos a partir de las plantillas
 import os # Interacción con el sistema de ficheros
+import stat # Permisos de fichero
+import shutil
 from io import open # Codificación de caracteres
 import json # Lectura de ficheros JSON
 
@@ -24,16 +26,20 @@ exit 0
 """
 
 	try:
-		with open(os.path.join(output_dir, "Makefile"), 'w') as makefile:
+		file_name = os.path.join(output_dir, "run.sh")
+		with open(file_name, 'w') as makefile:
 			makefile.write(makefile_text)
+
+			st = os.stat(file_name)
+			os.chmod(file_name, st.st_mode | stat.S_IEXEC)
 	except OSError as ose:
-		sys.exit("Error al crear el fichero Makefile: %s" % ose)
+		sys.exit("Error al crear el fichero run.sh: %s" % ose)
 	return
 
 def generage_latexmkrc(output_dir):
 	latexmkrc_text = """$clean_ext .= ' %R.ist %R.xdy';
 
-$pdflatex = 'xelatex -interaction=nonstopmode -synctex=1 -shell-escape %O %S';
+$pdflatex = 'pdflatex -interaction=nonstopmode -synctex=1 -shell-escape %O %S';
 $pdf_mode = 1;
 $bibtex_use = 1;
 $biber = 'biber --debug %O %S';
@@ -43,10 +49,18 @@ $clean_ext = '%R.run.xml %R.syntex.gz %R.synctex.gz %R.bbl';
 	try:
 		with open(os.path.join(output_dir, "latexmkrc"), 'w') as latexmkrc:
 			latexmkrc.write(latexmkrc_text)
+
 	except OSError as ose:
 		sys.exit("Error al crear el fichero latexmkrc: %s" % ose)
+	
 	return
 
+def copy_img_files(output_dir, img_dir="./img"):
+	directory = os.path.join(output_dir, os.path.basename(os.path.normpath(img_dir)))
+	try: 
+		shutil.copytree(img_dir, directory)
+	except FileExistsError as fee:
+		sys.stderr.write("ADVERTENCIA. La carpeta de imágenes ya existe. No se copiarán los ficheros\n")
 locale.setlocale(locale.LC_TIME, "es_ES")
 # print time.strftime("%a, %d %b %Y %H:%M:%S")
 
@@ -108,7 +122,10 @@ def procesar_plantilla(datos, line_num):
 	
 	try:
 		with open(args.plantilla, 'r', encoding="utf-8") as plantilla:
-			with open(os.path.join(args.destino, "%s_%s_%s.tex" % (nombre, apellidos, dni)), 'w', encoding="utf-8") as destination:
+			file_name = "%s_%s_%s.tex" % (nombre, apellidos, dni)
+			file_name = file_name.replace(" ", "_")
+			
+			with open(os.path.join(args.destino, file_name), 'w', encoding="utf-8") as destination:
 				destination.write(pystache.render(plantilla.read(), row))
 	except FileNotFoundError as f:
 		sys.exit("Error. El fichero '%s' no existe" % args.plantilla)
@@ -229,4 +246,8 @@ sys.stdout.write("[HECHO]\n")
 
 sys.stdout.write("Generando script de ejecución...")
 generate_launch_script(args.destino)
+sys.stdout.write("[HECHO]\n")
+
+sys.stdout.write("Copiando imágenes...");
+copy_img_files(args.destino)
 sys.stdout.write("[HECHO]\n")
