@@ -8,6 +8,7 @@ import os # Interacción con el sistema de ficheros
 from io import open # Codificación de caracteres
 import json # Lectura de ficheros JSON
 
+from datetime import datetime
 import time # Manipulación de fechas
 import locale # Conversión de fecha a formato legible
 
@@ -83,18 +84,57 @@ try:
 except FileNotFoundError as f:
 	sys.exit("El fichero de descripción del evento '%s' no se ha encontrado" % args.descripcion)			
 
-print(evento)
+# Verificacion del formato del fichero
+if not all(k in evento for k in ("nombre_seminario", "fecha", "duracion", "objetivos", "contenido_especifico")):
+	sys.exit("El fichero '%s' no dispone de todos los campos necesarios (\"nombre\", \"fecha\", \"objetivos\", \"contenido_especifico\")" % args.descripcion)
+
+try:
+	fecha = datetime.strptime(evento["fecha"], "%d/%m/%Y")
+except ValueError as v:
+	sys.exit("Formato de fecha incorrecto")
+evento["fecha"] = fecha.strftime("%-d de %B de %-Y")
+
+# Plural en la duración
+if evento["duracion"] > 1:
+	evento["sufijo"] = "s"
+else:
+	evento["sufijo"] = ""
+# TODO Formatear fracciones de hora (y media, tres cuartos...), aproximando al valor más cercano
+
+if not isinstance(evento["objetivos"], list):
+	sys.exit("Los objetivos deben recogerse en un array")
+
+if len(evento["objetivos"]) == 0:
+	sys.exit("Debe haber al menos un objetivo definido")
+
+objetivos = []
+for objetivo in evento["objetivos"]:
+	objetivos.append({"objectivo" : objetivo})
+
+evento["objetivos"] = objetivos
+
+if not isinstance(evento["contenido_especifico"], list):
+	sys.exit("El contenido específico debe recogerse en un array")
+
+if len(evento["contenido_especifico"]) == 0:
+	sys.exit("Debe haber al menos una entrada en la lista de contenidos específicos")
+
+contenido_especifico = []
+for contenido in evento["contenido_especifico"]:
+	contenido_especifico.append({"valor": contenido})
+
+evento["contenido_especifico"] = contenido_especifico
 
 if not os.path.isdir(args.destino):
 	try:
 		os.makedirs(args.destino, mode=0o755)
 	except OSError as e:
 		sys.exit(e)
-
 try:
 	with open(args.asistentes) as asistentes:
 		asistentesreader = csv.DictReader(asistentes, delimiter=args.delimitador, quotechar='"')
 		for row in asistentesreader:
+			row.update(evento)
 			procesar_plantilla(row, asistentesreader.line_num)
 
 except FileNotFoundError as f:
