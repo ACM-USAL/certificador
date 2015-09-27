@@ -1,0 +1,21 @@
+{
+	"director_seminario":{
+		"cargo": "Directora del seminario",
+		"nombre": "Dra. María Angélica González Arrieta",
+		"linea1": "Departamento de Informática y Automática",
+		"linea2": "Universidad de Salamanca"
+	},
+	"autoridad_universidad":{
+		"cargo": "El Rector,P.D.F. (BOCyL 9-2-10)",
+		"nombre": "Da Carmen Fernández Juncal",
+		"linea1": "Vicerrectora de Docencia",
+		"linea2": "Universidad de Salamanca"
+	},
+	"autoridad_emisora":{
+		"cargo": "El director del Centro de Formación Permanente",
+		"nombre": "Prof. Juan Luis García Alonso",
+		"linea1": "Universidad de Salamanca",
+		"linea2": ""
+	},
+	"fecha_expedicion": "10/05/2015"
+}

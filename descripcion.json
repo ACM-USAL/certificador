@@ -1,0 +1,17 @@
+{
+	"nombre_seminario": "DESARROLLO DE VIDEOJUEGOS CON EL MOTOR GRÁFICO UNITY3D",
+	"fecha": "10/05/2015",
+	"duracion":1.4,
+	"objetivos": [
+		"Dar una introducción a la plataforma de desarrollo de videojuegos Unity3D.",
+		"Modelado bidimensional.",
+		"Programación de la lógica interna de un juego.",
+		"Desarrollo para diferentes dispositivos, integración de la plataforma con otros módulos, etcétera."
+		],
+	"contenido_especifico":[
+		"Instalación y configuración del entorno de desarrollo.",
+		"Conocimiento básico de los fundamentos de Unity3D.",
+		"Utilización y manipulación de elementos de un juego (escenario, personajes...).",
+		"Programación en Unity3D utilizando las herramientas integradas en el sistema.",
+		"Desarrollo para diferentes plataformas (ordenadores, móviles, táblets, consolas) e integración con componentes externos (librerías, frameworks...)."]
+}
