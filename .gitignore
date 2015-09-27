@@ -65,7 +65,7 @@ Thumbs.db
 
 # Archivos de depurado
 
-*.ods
-*.csv
+#*.ods
+#*.csv
 certificados/*
 
