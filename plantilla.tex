@@ -1,0 +1,102 @@
+% !TEX encoding = UTF-8 Unicode
+\documentclass[spanish]{article}
+
+% Ajustes de idioma (añade soporte para la división de palabras al final de linea	y otros ajustes dependientes del idioma)
+\usepackage[spanish]{babel}
+\selectlanguage{spanish}
+
+% Codificación de caracteres
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% Geometría del papel. A4 apaisado
+\usepackage[a4paper,top=2.4cm, left=2cm, right=2cm, bottom=2cm, landscape %, showframe %Descomentar para imprimir los márgenes (depuración)
+]{geometry}
+
+% Aumenta el espacio disponible al eliminar el espacio reservado para la cabecera
+\setlength{\headsep}{0pt}
+
+% Genera Lorem Ipsum (pruebas)
+\usepackage{lipsum}
+
+% Inclusión de imágenes
+\usepackage{graphicx}
+% Rutas de búsqueda de imágenes
+\graphicspath{{img/}}
+
+% Fuente arial. Es necesario instalar previamente las fuentes no libres disponibles en CTAN (ver README)
+\usepackage[scaled]{uarial}
+\renewcommand*\familydefault{\sfdefault}
+
+% Desactiva la enumeración de páginas (por defecto en la clase article)
+\pagenumbering{gobble}
+
+\begin{document}
+
+\hbox{
+	\includegraphics[height=3.2cm]{usallogo}
+	\hspace{14.2cm}
+	\raisebox{0.35\height}{\includegraphics[height=2cm]{acmlogo}}
+}
+\vspace{0.5cm}
+\begin{center}
+
+{\LARGE \textbf{CERTIFICADO DE ASISTENCIA}\\[0.5cm]}
+{\Large OTORGADO A D./Da. \textbf{Nombre.. Apellidos..}\\[0.2cm]}
+{Con D.N.I. DNI..\\[0.3cm]}
+{\large Por la participación en el \textbf{DESARROLLO DE VIDEOJUEGOS CON EL MOTOR GRÁFICO UNITY3D}, presentado por el Servicio de Formación Permanente de la Universidad de Salamanca y el Capítulo de Estudiantes ACM USAL, celebrado el día 10 de marzo de 2015 en la Facultad de Ciencias de la Universidad de Salamanca, con una duración de 4 horas, de acuerdo con el programa que figura en el reverso de este documento.\\[0.5cm]
+Y para que conste, se expide esta certificación en Salamanca, a 10 de marzo de 2014.\\}
+
+\vspace*{2cm}
+
+% Espacio para las firmas
+\parbox{0.9\textwidth}{
+	\parbox{7cm}{
+		\centering
+		Directora del seminario\\
+		\vspace*{2cm}
+		Dra. María Angélica González Arrieta\\
+		Departamento de Informática y Automática\\
+		Universidad de Salamanca
+	}
+	\hfill
+	\parbox{7cm}{
+		\centering
+		El Rector,P.D.F. (BOCyL 9-2-10)
+		\vspace*{2cm}
+		Da Carmen Fernández Juncal\\
+		Vicerrectora de Docencia\\
+		Universidad de Salamanca
+	}
+}
+\end{center}
+\newpage
+
+\textbf{Objetivos del seminario}
+\begin{itemize}
+\item Dar una introducción a la plataforma de desarrollo de videojuegos Unity3D.
+\item Modelado bidimensional.
+\item Programación de la lógica interna de un juego.
+\item Desarrollo para diferentes dispositivos, integración de la plataforma con otros módulos, etcétera.
+\end{itemize}
+
+\vspace*{0.5cm}
+
+\textbf{Contenido específico}
+\begin{enumerate}
+\item Instalación y configuración del entorno de desarrollo.
+\item Conocimiento básico de los fundamentos de Unity3D.
+\item Utilización y manipulación de elementos de un juego (escenario, personajes...).
+\item Programación en Unity3D utilizando las herramientas integradas en el sistema.
+\item Desarrollo para diferentes plataformas (ordenadores, móviles, táblets, consolas) e integración con componentes externos (librerías, frameworks...).
+\end{enumerate}
+
+\vspace*{0.7cm}
+
+\begin{center}
+El director del Centro de Formación Permanente\\
+\vspace*{3cm}
+Prof. Juan Luis García Alonso\\
+Universidad de Salamanca
+\end{center}
+\end{document}

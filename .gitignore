@@ -56,3 +56,16 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# Ficheros del sistema operativo
+
+.DS_STORE
+Thumbs.db
+
+
+# Archivos de depurado
+
+*.ods
+*.csv
+certificados/*
+
